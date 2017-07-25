@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Republic</string>
+
+    <string name="navigation_drawer_open">Открыть меню</string>
+    <string name="navigation_drawer_close">Закрыть меню</string>
+
+    <string name="menu_home">Главная</string>
+    <string name="menu_places">Места</string>
+    <string name="menu_tours">Туры</string>
+    <string name="menu_transport_rent">Аренда транспорта</string>
+    <string name="menu_services">Услуги</string>
+    <string name="menu_stories">Истории</string>
+    <string name="menu_share_us">Рассказать о нас</string>
+    <string name="menu_estimate">Оценить приложение</string>
+    <string name="menu_about">О приложении</string>
+    <string name="menu_write_us">Напишите нам</string>
+    <string name="menu_terms">Соглашение</string>
+    <string name="navigation_login">Войти</string>
+    <string name="content_desc">Content description</string>
+    <string name="reload">Reload</string>
+    <string name="card_more_btn">More</string>
+    <string name="profile_name_hint">Имя фамилия</string>
+    <string name="profile_email_hint">Email</string>
+    <string name="auth_toolbar_title">Авторизация</string>
+    <string name="auth_password_hint">Пароль</string>
+    <string name="auth_register_btn">Регистрация</string>
+    <string name="auth_forgot_password_btn">Забыли пароль?</string>
+
+</resources>

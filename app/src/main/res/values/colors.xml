@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#5BAAFA</color>
+    <color name="colorPrimaryDark">#4293E5</color>
+    <color name="colorAccent">#757575</color>
+
+    <color name="white">#ffffffff</color>
+    <color name="primary_text_color">#272727</color>
+    <color name="secondary_text_dark">#9E9E9E</color>
+    <color name="color_grey">#FFBDBDBD</color>
+    <color name="screen_background">#EEEEEE</color>
+    <color name="default_icon_color">#727272</color>
+    <color name="selected_icon_color">#4285F4</color>
+</resources>

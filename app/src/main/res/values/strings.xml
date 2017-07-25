@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Republic</string>
+
+    <!-- Fonts -->
+    <string name="roboto_regular">sans-serif</string>
+    <string name="roboto_light">sans-serif-light</string>
+    <string name="roboto_condensed">sans-serif-condensed</string>
+    <string name="roboto_black">sans-serif-black</string>
+    <string name="roboto_thin">sans-serif-thin</string>
+    <string name="roboto_medium">sans-serif-medium</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_places">Places</string>
+    <string name="menu_tours">Tours</string>
+    <string name="menu_transport_rent">Transport rent</string>
+    <string name="menu_services">Services</string>
+    <string name="menu_stories">Stories</string>
+    <string name="menu_share_us">Share us</string>
+    <string name="menu_estimate">Estimate</string>
+    <string name="menu_about">About</string>
+    <string name="menu_write_us">Write us</string>
+    <string name="menu_terms">Terms of use</string>
+    <string name="navigation_login">Login</string>
+    <string name="content_desc">Content description</string>
+    <string name="reload">Reload</string>
+    <string name="card_more_btn">More</string>
+    <string name="profile_name_hint">Имя фамилия</string>
+    <string name="profile_email_hint">Email</string>
+    <string name="auth_toolbar_title">Login</string>
+    <string name="auth_password_hint">Password</string>
+</resources>
