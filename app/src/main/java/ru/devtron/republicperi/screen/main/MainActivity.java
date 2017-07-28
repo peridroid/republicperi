@@ -1,9 +1,11 @@
-package ru.devtron.republicperi;
+package ru.devtron.republicperi.screen.main;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,7 +16,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import ru.devtron.republicperi.screen.auth.AuthActivity;
+import ru.devtron.republicperi.R;
+import ru.devtron.republicperi.screen.profile.ProfileActivity;
+
+public class MainActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -29,6 +36,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         initToolbar();
         initNavigationView();
+        if (savedInstanceState == null) {
+            MainFragment mainFragment = new MainFragment();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.root_frame, mainFragment);
+            fragmentTransaction.commit();
+        }
     }
 
     private void initToolbar() {
@@ -71,7 +85,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout.closeDrawer(GravityCompat.START);
         switch (item.getItemId()) {
             case R.id.nav_home:
-                Toast.makeText(MainActivity.this, "Home", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "HomeScreen", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.nav_places:
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
                 break;
         }
 

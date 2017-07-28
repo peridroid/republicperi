@@ -32,4 +32,6 @@
     <string name="profile_email_hint">Email</string>
     <string name="auth_toolbar_title">Login</string>
     <string name="auth_password_hint">Password</string>
+    <string name="auth_register_btn">Sign up</string>
+    <string name="auth_forgot_password_btn">Forgot password?</string>
 </resources>
