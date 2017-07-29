@@ -1,4 +1,4 @@
-package ru.devtron.republicperi.screen.main;
+package ru.devtron.republicperi.ui.screen.service_creator;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,11 +9,13 @@ import android.view.ViewGroup;
 
 import ru.devtron.republicperi.R;
 
-public class MainFragment extends Fragment {
+public class ServiceCreatorFragment extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_add_service, container, false);
+
         return view;
     }
 }

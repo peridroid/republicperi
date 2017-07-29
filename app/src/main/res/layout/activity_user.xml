@@ -5,11 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@color/screen_background"
     android:fitsSystemWindows="true"
-    android:background="@color/screen_background">
+    android:orientation="vertical">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -19,32 +20,33 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:title="Добавить услугу"
-            app:popupTheme="@style/AppTheme.PopupOverlay"/>
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:title="Добавить услугу"/>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_gravity="bottom"
+            android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:tabGravity="fill"
-            app:tabIndicatorColor="#ffdd60"
-            app:tabIndicatorHeight="4dp"
+            app:tabIndicatorColor="@color/white"
+            app:tabIndicatorHeight="3dp"
             app:tabMode="fixed"/>
 
-        <android.support.v7.widget.CardView
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar_profile"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            app:cardElevation="4dp">
+            android:layout_height="102dp"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/white"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="16dp"
+                app:cardElevation="4dp"
+                app:layout_collapseMode="pin">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/avatar_image_view"
@@ -74,15 +76,16 @@
 
                 </LinearLayout>
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </android.support.design.widget.CollapsingToolbarLayout>
+
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
         android:layout_margin="8dp"
+        android:background="@color/white"
         android:elevation="4dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 

@@ -1,4 +1,4 @@
-package ru.devtron.republicperi.screen.profile.adapter;
+package ru.devtron.republicperi.ui.screen.profile.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -6,8 +6,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 
-import ru.devtron.republicperi.screen.profile_edit.ProfileEditFragment;
-import ru.devtron.republicperi.screen.service_creator.ServiceCreatorFragment;
+import ru.devtron.republicperi.ui.screen.profile_edit.ProfileEditFragment;
+import ru.devtron.republicperi.ui.screen.service_creator.ServiceCreatorFragment;
 
 public class TabAdapter extends FragmentStatePagerAdapter {
     private ArrayList<Fragment> mFragmentArrayList;

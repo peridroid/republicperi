@@ -1,4 +1,4 @@
-package ru.devtron.republicperi.screen.auth;
+package ru.devtron.republicperi.ui.screen.auth;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

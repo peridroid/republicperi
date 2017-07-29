@@ -1,4 +1,4 @@
-package ru.devtron.republicperi.screen.service_creator;
+package ru.devtron.republicperi.ui.screen.profile_edit;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,12 +9,12 @@ import android.view.ViewGroup;
 
 import ru.devtron.republicperi.R;
 
-public class ServiceCreatorFragment extends Fragment {
+public class ProfileEditFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_add_service, container, false);
+        View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         return view;
     }

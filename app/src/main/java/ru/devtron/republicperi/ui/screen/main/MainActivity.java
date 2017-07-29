@@ -1,4 +1,4 @@
-package ru.devtron.republicperi.screen.main;
+package ru.devtron.republicperi.ui.screen.main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,9 +16,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import ru.devtron.republicperi.screen.auth.AuthActivity;
+import ru.devtron.republicperi.ui.screen.auth.AuthActivity;
 import ru.devtron.republicperi.R;
-import ru.devtron.republicperi.screen.profile.ProfileActivity;
+import ru.devtron.republicperi.ui.screen.profile.ProfileActivity;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
