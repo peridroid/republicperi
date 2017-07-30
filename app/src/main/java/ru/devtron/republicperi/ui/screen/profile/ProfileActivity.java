@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
@@ -13,6 +14,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.animation.AccelerateInterpolator;
 
 import ru.devtron.republicperi.R;
 import ru.devtron.republicperi.ui.screen.profile.adapter.TabAdapter;
@@ -21,11 +23,11 @@ public class ProfileActivity extends AppCompatActivity {
 
     private static final String TAG = "ProfileActivity";
 
+    CollapsingToolbarLayout mCollapsingToolbarLayout;
     ViewPager mViewPager;
     TabLayout mTabLayout;
     Toolbar mToolbar;
     AppBarLayout mAppbar;
-
     TabAdapter adapter;
 
     private int[] icons = {
@@ -49,6 +51,9 @@ public class ProfileActivity extends AppCompatActivity {
         mTabLayout = findViewById(R.id.tab_layout);
         mToolbar = findViewById(R.id.toolbar);
         mAppbar = findViewById(R.id.app_bar);
+
+        mCollapsingToolbarLayout = findViewById(R.id.collapsing_toolbar_profile);
+
         selectedTabIconColor = ContextCompat.getColor(ProfileActivity.this, R.color.white);
         unSelectedTabIconColor = ContextCompat.getColor(ProfileActivity.this, R.color.unselected_tab_icon_color);
         setSupportActionBar(mToolbar);
@@ -85,10 +90,28 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+
+
+        final AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) mCollapsingToolbarLayout.getLayoutParams();
+        final int startHeight = params.height;
+        final AccelerateInterpolator interpolator = new AccelerateInterpolator(1f);
+
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                Log.d(TAG, "onPageScrolled: position + " + position + " positionOffset " + positionOffset + " positionOffsetPixels " + positionOffsetPixels);
+            public void onPageScrolled(int position, float positionOffs, int positionOffsetPixels) {
+                float positionOffset = 1 - positionOffs;
+
+                Log.i(TAG, "onPageScrolled: position + " + position + " positionOffset " + positionOffset + " positionOffsetPixels " + positionOffsetPixels);
+
+
+                if ((position == adapter.getCount() - 1 && positionOffset == 1) ||
+                        position < adapter.getCount() - 2)
+                    return;
+
+                mCollapsingToolbarLayout.setAlpha(interpolator.getInterpolation(positionOffset));
+                int newHeight = (int) (startHeight * positionOffset);
+                params.height = newHeight > startHeight ? startHeight : newHeight;
+                mCollapsingToolbarLayout.setLayoutParams(params);
             }
 
             @Override
@@ -106,6 +129,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
     }
+
 
     private void changeColorTabIcon(int color, Drawable tabIcon) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
