@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:background="@color/white"
-    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/white"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
         android:padding="16dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -21,36 +24,76 @@
 
         <Button
             style="@style/BorderlessBtn"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="12dp"
-            android:text="Изменить фотографию"/>
+            android:text="Изменить фотографию"
+            android:theme="@style/BorderlessBtn"/>
     </LinearLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/fio_til"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
-
-        <EditText
-            style="@style/auth_et_style"
-            android:hint="@string/profile_name_hint"
-            android:id="@+id/fio_et"
-            android:inputType="textCapWords"
-            android:textSize="14sp"/>
-    </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <EditText
+            android:id="@+id/email_et"
             style="@style/auth_et_style"
             android:hint="@string/profile_email_hint"
-            android:id="@+id/email_et"
-            android:inputType="textEmailAddress"
-            android:textSize="14sp"/>
+            android:inputType="textEmailAddress"/>
     </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/name_et"
+            style="@style/auth_et_style"
+            android:hint="Имя"
+            android:inputType="textPersonName"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/surname_et"
+            style="@style/auth_et_style"
+            android:hint="Фамилия"
+            android:inputType="textPersonName"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/last_password"
+            style="@style/auth_et_style"
+            android:hint="Старый пароль"
+            android:inputType="textPassword"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/new_password"
+            style="@style/auth_et_style"
+            android:hint="Новый пароль"
+            android:inputType="textPassword"/>
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        style="@style/CustomButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Сохранить"
+        android:layout_marginTop="36dp"
+        android:theme="@style/LoginBtn"/>
 
 </LinearLayout>
