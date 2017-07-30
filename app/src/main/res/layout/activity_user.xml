@@ -49,7 +49,7 @@
                 app:cardElevation="4dp"
                 app:layout_collapseMode="pin">
 
-                <de.hdodenhof.circleimageview.CircleImageView
+                <ru.devtron.republicperi.utils.CircleImageView
                     android:id="@+id/avatar_image_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
