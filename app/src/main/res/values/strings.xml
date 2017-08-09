@@ -34,4 +34,12 @@
     <string name="auth_password_hint">Password</string>
     <string name="auth_register_btn">Sign up</string>
     <string name="auth_forgot_password_btn">Forgot password?</string>
+
+    <string name="card_rent_bus">Rent buses and minibuses</string>
+    <string name="card_rent_hotel">Check-in at the hotel</string>
+    <string name="card_guide_services">Guide services</string>
+
+
+    <string name="card_nearest_tours_heading">Nearest tours</string>
+    <string name="card_showplace_heading">Showplaces</string>
 </resources>
