@@ -28,12 +28,17 @@
     <string name="content_desc">Content description</string>
     <string name="reload">Reload</string>
     <string name="card_more_btn">More</string>
-    <string name="profile_name_hint">Имя фамилия</string>
+    <string name="profile_name_hint">Name</string>
+    <string name="profile_surname_hint">Surname</string>
     <string name="profile_email_hint">Email</string>
     <string name="auth_toolbar_title">Login</string>
     <string name="auth_password_hint">Password</string>
-    <string name="auth_register_btn">Sign up</string>
+    <string name="auth_confirm_password_hint">Confirm password</string>
+    <string name="auth_register_btn">Sign in</string>
     <string name="auth_forgot_password_btn">Forgot password?</string>
+    <string name="registr_auth_btn">Sign in</string>
+    <string name="registr_forgot_password_btn">Forgot password?</string>
+    <string name="repair_send_btn">Send</string>
 
     <string name="card_rent_bus">Rent buses and minibuses</string>
     <string name="card_rent_hotel">Check-in at the hotel</string>

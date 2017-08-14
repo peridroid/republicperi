@@ -23,6 +23,10 @@
         </activity>
         <activity android:name=".ui.screen.profile.ProfileActivity"
                   android:parentActivityName=".ui.screen.main.MainActivity"/>
+        <activity android:name=".ui.screen.registr.RegistrActivity"
+                  android:parentActivityName=".ui.screen.auth.AuthActivity"/>
+        <activity android:name=".ui.screen.repair.RepairActivity"
+                  android:parentActivityName=".ui.screen.auth.AuthActivity"/>
     </application>
 
 </manifest>

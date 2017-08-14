@@ -25,7 +25,10 @@
     <string name="auth_password_hint">Пароль</string>
     <string name="auth_register_btn">Регистрация</string>
     <string name="auth_forgot_password_btn">Забыли пароль?</string>
-    
+    <string name="registr_auth_btn">Авторизация</string>
+    <string name="registr_forgot_password_btn">Забыли пароль?</string>
+    <string name="repair_send_btn">Отправить</string>
+
     <string name="card_rent_bus">Аренда автобусов и микроавтобусов</string>
     <string name="card_rent_hotel">Поселение в отеле</string>
     <string name="card_guide_services">Услуги гида</string>

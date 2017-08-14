@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/RepublicPeri.iml" filepath="$PROJECT_DIR$/RepublicPeri.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/republicperi.iml" filepath="$PROJECT_DIR$/republicperi.iml" />
     </modules>
   </component>
 </project>
