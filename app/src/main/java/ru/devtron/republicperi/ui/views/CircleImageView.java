@@ -1,4 +1,4 @@
-package ru.devtron.republicperi.utils;
+package ru.devtron.republicperi.ui.views;
 
 
 import android.content.Context;

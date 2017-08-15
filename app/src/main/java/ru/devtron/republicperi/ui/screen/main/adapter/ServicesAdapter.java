@@ -1,27 +1,25 @@
 package ru.devtron.republicperi.ui.screen.main.adapter;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import ru.devtron.republicperi.R;
-import ru.devtron.republicperi.data.network.BaseResponse;
-import ru.devtron.republicperi.data.network.ServicesResponse;
-
-import static android.content.ContentValues.TAG;
+import ru.devtron.republicperi.data.network.response.ServicesResponse;
 
 public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.MyViewHolder> {
-    private List<ServicesResponse> itemList;
+    private List<ServicesResponse.ServiceRes> itemList;
 
-    public ServicesAdapter(List<? extends BaseResponse> itemList) {
-        this.itemList = (List<ServicesResponse>) itemList;
-        Log.d(TAG, "ServicesAdapter: " + this.itemList);
+    public ServicesAdapter(List<ServicesResponse.ServiceRes> itemList) {
+        this.itemList = itemList;
     }
 
     @Override
@@ -32,9 +30,14 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        ServicesResponse item = itemList.get(position);
+        ServicesResponse.ServiceRes item = itemList.get(position);
         holder.titleTextView.setText(item.getTitle());
-        //holder.pictureImageView.setImageResource(item.getImg());
+        if (!TextUtils.isEmpty(item.getImg())) {
+            Picasso.with(holder.pictureImageView.getContext())
+                    .load(item.getImg())
+                    .resizeDimen(R.dimen.picture_width, R.dimen.picture_height)
+                    .into(holder.pictureImageView);
+        }
     }
 
     @Override

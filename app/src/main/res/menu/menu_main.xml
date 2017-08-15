@@ -6,27 +6,27 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_home"
             android:checked="true"
-            android:title="@string/menu_home"/>
+            android:name="@string/menu_home"/>
         <item
             android:id="@+id/nav_places"
             android:icon="@drawable/ic_menu_places"
-            android:title="@string/menu_places"/>
+            android:name="@string/menu_places"/>
         <item
             android:id="@+id/nav_tours"
             android:icon="@drawable/ic_menu_tours"
-            android:title="@string/menu_tours"/>
+            android:name="@string/menu_tours"/>
         <item
             android:id="@+id/nav_transport"
             android:icon="@drawable/ic_menu_transport"
-            android:title="@string/menu_transport_rent"/>
+            android:name="@string/menu_transport_rent"/>
         <item
             android:id="@+id/nav_services"
             android:icon="@drawable/ic_menu_services"
-            android:title="@string/menu_services"/>
+            android:name="@string/menu_services"/>
         <item
             android:id="@+id/nav_stories"
             android:icon="@drawable/ic_menu_history"
-            android:title="@string/menu_stories"/>
+            android:name="@string/menu_stories"/>
     </group>
 
     <group android:id="@+id/additional_group"  android:checkableBehavior="none">
@@ -34,28 +34,28 @@
             android:id="@+id/nav_share"
             android:icon="@drawable/ic_menu_share"
             android:checkable="false"
-            android:title="@string/menu_share_us"/>
+            android:name="@string/menu_share_us"/>
         <item
             android:id="@+id/nav_estimate"
             android:icon="@drawable/ic_menu_estimate"
             android:checkable="false"
-            android:title="@string/menu_estimate"/>
+            android:name="@string/menu_estimate"/>
 
         <item
             android:id="@+id/nav_about"
             android:icon="@drawable/ic_menu_about"
             android:checkable="false"
-            android:title="@string/menu_about"/>
+            android:name="@string/menu_about"/>
 
         <item
             android:id="@+id/nav_feedback"
             android:icon="@drawable/ic_menu_feedback"
             android:checkable="false"
-            android:title="@string/menu_write_us"/>
+            android:name="@string/menu_write_us"/>
         <item
             android:id="@+id/nav_terms"
             android:icon="@drawable/ic_menu_copyright"
             android:checkable="false"
-            android:title="@string/menu_terms"/>
+            android:name="@string/menu_terms"/>
     </group>
 </menu>

@@ -16,11 +16,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import ru.devtron.republicperi.R;
 import ru.devtron.republicperi.data.CommonRepository;
-import ru.devtron.republicperi.data.network.BaseResponse;
-import ru.devtron.republicperi.data.network.PlaceResponse;
-import ru.devtron.republicperi.data.network.ServicesResponse;
+import ru.devtron.republicperi.data.network.response.BaseResponse;
+import ru.devtron.republicperi.data.network.response.PlaceResponse;
+import ru.devtron.republicperi.data.network.response.ServicesResponse;
+import ru.devtron.republicperi.data.network.response.TourResponse;
 import ru.devtron.republicperi.ui.screen.main.adapter.ItemAdapter;
 import ru.devtron.republicperi.ui.screen.main.adapter.ServicesAdapter;
 
@@ -60,7 +64,7 @@ public class MainFragment extends Fragment {
                 LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         if (position == 2) {
-            ServicesAdapter adapter = new ServicesAdapter(response);
+            ServicesAdapter adapter = new ServicesAdapter((List<ServicesResponse.ServiceRes>) response);
             recyclerView.setAdapter(adapter);
         } else {
             ItemAdapter adapter = new ItemAdapter(response);
@@ -79,13 +83,51 @@ public class MainFragment extends Fragment {
 
     private void requestItemsFromNetwork() {
         //first cardview
-        List<PlaceResponse> placeResponse = CommonRepository.getInstance().getNearestTours();
-        initRecyclerView(0, placeResponse);
+        Call<TourResponse> callTours = CommonRepository.getInstance().getNearestTours();
+        callTours.enqueue(new Callback<TourResponse>() {
+            @Override
+            public void onResponse(Call<TourResponse> call, Response<TourResponse> response) {
+                if (response.isSuccessful()) {
+                    initRecyclerView(0, response.body().getTours());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TourResponse> call, Throwable t) {
+
+            }
+        });
+
         //second cardview
-        List<PlaceResponse> showPlacesResponse = CommonRepository.getInstance().getNearestTours();
-        initRecyclerView(1, showPlacesResponse);
+        Call<PlaceResponse> showPlacesCall = CommonRepository.getInstance().getNearestPlaces();
+        showPlacesCall.enqueue(new Callback<PlaceResponse>() {
+            @Override
+            public void onResponse(Call<PlaceResponse> call, Response<PlaceResponse> response) {
+                if (response.isSuccessful()) {
+                    initRecyclerView(1, response.body().getPlaces());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PlaceResponse> call, Throwable t) {
+
+            }
+        });
+
         //third cardview
-        List<ServicesResponse> servicesResponse = CommonRepository.getInstance().getServices();
-        initRecyclerView(2, servicesResponse);
+        Call<ServicesResponse> servicesCall = CommonRepository.getInstance().getServices();
+        servicesCall.enqueue(new Callback<ServicesResponse>() {
+            @Override
+            public void onResponse(Call<ServicesResponse> call, Response<ServicesResponse> response) {
+                if (response.isSuccessful()) {
+                    initRecyclerView(2, response.body().services);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ServicesResponse> call, Throwable t) {
+
+            }
+        });
     }
 }
