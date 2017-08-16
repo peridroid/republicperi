@@ -14,8 +14,8 @@ import java.util.List;
 
 import ru.devtron.republicperi.R;
 import ru.devtron.republicperi.data.network.response.BaseResponse;
-import ru.devtron.republicperi.data.network.response.PlaceResponse;
-import ru.devtron.republicperi.data.network.response.TourResponse;
+import ru.devtron.republicperi.data.network.response.PlaceRes;
+import ru.devtron.republicperi.data.network.response.TourRes;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {
     private List<? extends BaseResponse> itemList;
@@ -34,8 +34,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         holder.titleTextView.setText(itemList.get(position).getTitle());
-        if (itemList.get(position) instanceof PlaceResponse.PlaceRes) {
-            PlaceResponse.PlaceRes item = (PlaceResponse.PlaceRes) itemList.get(position);
+        if (itemList.get(position) instanceof PlaceRes) {
+            PlaceRes item = (PlaceRes) itemList.get(position);
             if (!TextUtils.isEmpty(item.getImg())) {
                 Picasso.with(holder.pictureImageView.getContext())
                         .load(item.getImg())
@@ -46,8 +46,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             }
 
             holder.cityTextView.setText(item.getCity().name);
-        } else if (itemList.get(position) instanceof TourResponse.TourRes) {
-            TourResponse.TourRes item = (TourResponse.TourRes) itemList.get(position);
+        } else if (itemList.get(position) instanceof TourRes) {
+            TourRes item = (TourRes) itemList.get(position);
             if (item.getImages() != null && item.getImages().size() > 0) {
                 Picasso.with(holder.pictureImageView.getContext())
                         .load(item.getImages().get(0).src)
@@ -56,7 +56,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             } else {
                 holder.pictureImageView.setImageResource(R.drawable.ui_appbar_light);
             }
-            //holder.cityTextView.setText(item.ge);
+            holder.cityTextView.setText(item.getDots().get(0).city.name);
         }
     }
 

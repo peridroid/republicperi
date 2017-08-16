@@ -1,10 +1,12 @@
 package ru.devtron.republicperi.data;
 
+import java.util.List;
+
 import retrofit2.Call;
 import ru.devtron.republicperi.data.network.ServiceFactory;
-import ru.devtron.republicperi.data.network.response.PlaceResponse;
-import ru.devtron.republicperi.data.network.response.ServicesResponse;
-import ru.devtron.republicperi.data.network.response.TourResponse;
+import ru.devtron.republicperi.data.network.response.PlaceRes;
+import ru.devtron.republicperi.data.network.response.ServiceRes;
+import ru.devtron.republicperi.data.network.response.TourRes;
 
 public class CommonRepository {
     private static CommonRepository repository;
@@ -15,15 +17,15 @@ public class CommonRepository {
         return repository;
     }
 
-    public Call<TourResponse> getNearestTours() {
+    public Call<List<TourRes>> getNearestTours() {
         return ServiceFactory.getApiService().getTours();
     }
 
-    public Call<PlaceResponse> getNearestPlaces() {
+    public Call<List<PlaceRes>> getNearestPlaces() {
         return ServiceFactory.getApiService().getPlaces();
     }
 
-    public Call<ServicesResponse> getServices() {
+    public Call<List<ServiceRes>> getServices() {
         return ServiceFactory.getApiService().getServices();
     }
 }

@@ -13,12 +13,12 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import ru.devtron.republicperi.R;
-import ru.devtron.republicperi.data.network.response.ServicesResponse;
+import ru.devtron.republicperi.data.network.response.ServiceRes;
 
 public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.MyViewHolder> {
-    private List<ServicesResponse.ServiceRes> itemList;
+    private List<ServiceRes> itemList;
 
-    public ServicesAdapter(List<ServicesResponse.ServiceRes> itemList) {
+    public ServicesAdapter(List<ServiceRes> itemList) {
         this.itemList = itemList;
     }
 
@@ -30,7 +30,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.MyView
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
-        ServicesResponse.ServiceRes item = itemList.get(position);
+        ServiceRes item = itemList.get(position);
         holder.titleTextView.setText(item.getTitle());
         if (!TextUtils.isEmpty(item.getImg())) {
             Picasso.with(holder.pictureImageView.getContext())
