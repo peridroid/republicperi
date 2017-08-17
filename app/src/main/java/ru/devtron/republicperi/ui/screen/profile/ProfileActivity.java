@@ -1,5 +1,6 @@
 package ru.devtron.republicperi.ui.screen.profile;
 
+import android.content.Context;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -15,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.animation.AccelerateInterpolator;
+import android.view.inputmethod.InputMethodManager;
 
 import ru.devtron.republicperi.R;
 import ru.devtron.republicperi.ui.screen.profile.adapter.TabAdapter;
@@ -32,11 +34,13 @@ public class ProfileActivity extends AppCompatActivity {
 
     private int[] icons = {
             R.drawable.ic_add_service,
+            R.drawable.ic_edit_orders,
             R.drawable.ic_account_edit
     };
 
     private String[] titles = {
             "Добавить услугу",
+            "Мои заказы",
             "Редактировать профиль"
     };
     private int selectedTabIconColor;
@@ -108,6 +112,10 @@ public class ProfileActivity extends AppCompatActivity {
                         position < adapter.getCount() - 2)
                     return;
 
+                if(position == 1){
+                    InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(mViewPager.getWindowToken(), 0);
+                }
                 mCollapsingToolbarLayout.setAlpha(interpolator.getInterpolation(positionOffset));
                 int newHeight = (int) (startHeight * positionOffset);
                 params.height = newHeight > startHeight ? startHeight : newHeight;

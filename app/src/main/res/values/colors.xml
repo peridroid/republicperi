@@ -13,4 +13,10 @@
     <color name="selected_icon_color">#4285F4</color>
     <color name="unselected_tab_icon_color">#80FFFFFF</color>
     <color name="more_btn_color">#078B75</color>
+
+    <color name="status_text_color">#FE7373</color>
+    <!-- cardview_order footers-->
+    <color name="redFooter">#FE7373</color>
+    <color name="blueFooter">#03A9F4</color>
+    <color name="orangeFooter">#F9C257</color>
 </resources>

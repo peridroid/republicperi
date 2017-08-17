@@ -28,6 +28,7 @@
     <string name="content_desc">Content description</string>
     <string name="reload">Reload</string>
     <string name="card_more_btn">More</string>
+    <string name="card_add_history_button">Add History</string>
     <string name="profile_name_hint">Name</string>
     <string name="profile_surname_hint">Surname</string>
     <string name="profile_email_hint">Email</string>
@@ -44,6 +45,8 @@
     <string name="card_rent_hotel">Check-in at the hotel</string>
     <string name="card_guide_services">Guide services</string>
 
+    <string name="active_tour_status">"Status: Tour is Active"</string>
+    <string name="completed_tour_status">"Status: Tour Completed"</string>
 
     <string name="card_nearest_tours_heading">Nearest tours</string>
     <string name="card_showplace_heading">Showplaces</string>

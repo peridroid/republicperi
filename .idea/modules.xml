@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RepublicPeri.iml" filepath="$PROJECT_DIR$/RepublicPeri.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/republicperi3.iml" filepath="$PROJECT_DIR$/republicperi3.iml" />
     </modules>
   </component>
 </project>
