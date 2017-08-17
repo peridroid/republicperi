@@ -1,16 +1,20 @@
 package ru.devtron.republicperi.data.network;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.GET;
-import ru.devtron.republicperi.data.network.response.PlaceResponse;
-import ru.devtron.republicperi.data.network.response.ServicesResponse;
-import ru.devtron.republicperi.data.network.response.TourResponse;
+import ru.devtron.republicperi.data.network.response.PlaceRes;
+import ru.devtron.republicperi.data.network.response.ServiceRes;
+import ru.devtron.republicperi.data.network.response.TourRes;
 
-public interface ApiService {
+interface ApiService {
 	@GET("tours")
-	Call<TourResponse> getTours();
+	Call<List<TourRes>> getTours();
 	@GET("category/services")
-	Call<ServicesResponse> getServices();
+	Call<List<ServiceRes>> getServices();
 	@GET("places")
-	Call<PlaceResponse> getPlaces();
+	Call<List<PlaceRes>> getPlaces();
+
+
 }

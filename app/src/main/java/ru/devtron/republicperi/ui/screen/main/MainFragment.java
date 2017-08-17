@@ -22,9 +22,9 @@ import retrofit2.Response;
 import ru.devtron.republicperi.R;
 import ru.devtron.republicperi.data.CommonRepository;
 import ru.devtron.republicperi.data.network.response.BaseResponse;
-import ru.devtron.republicperi.data.network.response.PlaceResponse;
-import ru.devtron.republicperi.data.network.response.ServicesResponse;
-import ru.devtron.republicperi.data.network.response.TourResponse;
+import ru.devtron.republicperi.data.network.response.PlaceRes;
+import ru.devtron.republicperi.data.network.response.ServiceRes;
+import ru.devtron.republicperi.data.network.response.TourRes;
 import ru.devtron.republicperi.ui.screen.main.adapter.ItemAdapter;
 import ru.devtron.republicperi.ui.screen.main.adapter.ServicesAdapter;
 
@@ -64,7 +64,7 @@ public class MainFragment extends Fragment {
                 LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(linearLayoutManager);
         if (position == 2) {
-            ServicesAdapter adapter = new ServicesAdapter((List<ServicesResponse.ServiceRes>) response);
+            ServicesAdapter adapter = new ServicesAdapter((List<ServiceRes>) response);
             recyclerView.setAdapter(adapter);
         } else {
             ItemAdapter adapter = new ItemAdapter(response);
@@ -83,49 +83,49 @@ public class MainFragment extends Fragment {
 
     private void requestItemsFromNetwork() {
         //first cardview
-        Call<TourResponse> callTours = CommonRepository.getInstance().getNearestTours();
-        callTours.enqueue(new Callback<TourResponse>() {
+        Call<List<TourRes>> callTours = CommonRepository.getInstance().getNearestTours();
+        callTours.enqueue(new Callback<List<TourRes>>() {
             @Override
-            public void onResponse(Call<TourResponse> call, Response<TourResponse> response) {
+            public void onResponse(Call<List<TourRes>> call, Response<List<TourRes>> response) {
                 if (response.isSuccessful()) {
-                    initRecyclerView(0, response.body().getTours());
+                    initRecyclerView(0, response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<TourResponse> call, Throwable t) {
+            public void onFailure(Call<List<TourRes>> call, Throwable t) {
 
             }
         });
 
         //second cardview
-        Call<PlaceResponse> showPlacesCall = CommonRepository.getInstance().getNearestPlaces();
-        showPlacesCall.enqueue(new Callback<PlaceResponse>() {
+        Call<List<PlaceRes>> showPlacesCall = CommonRepository.getInstance().getNearestPlaces();
+        showPlacesCall.enqueue(new Callback<List<PlaceRes>>() {
             @Override
-            public void onResponse(Call<PlaceResponse> call, Response<PlaceResponse> response) {
+            public void onResponse(Call<List<PlaceRes>> call, Response<List<PlaceRes>> response) {
                 if (response.isSuccessful()) {
-                    initRecyclerView(1, response.body().getPlaces());
+                    initRecyclerView(1, response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<PlaceResponse> call, Throwable t) {
+            public void onFailure(Call<List<PlaceRes>> call, Throwable t) {
 
             }
         });
 
         //third cardview
-        Call<ServicesResponse> servicesCall = CommonRepository.getInstance().getServices();
-        servicesCall.enqueue(new Callback<ServicesResponse>() {
+        Call<List<ServiceRes>> servicesCall = CommonRepository.getInstance().getServices();
+        servicesCall.enqueue(new Callback<List<ServiceRes>>() {
             @Override
-            public void onResponse(Call<ServicesResponse> call, Response<ServicesResponse> response) {
+            public void onResponse(Call<List<ServiceRes>> call, Response<List<ServiceRes>> response) {
                 if (response.isSuccessful()) {
-                    initRecyclerView(2, response.body().services);
+                    initRecyclerView(2, response.body());
                 }
             }
 
             @Override
-            public void onFailure(Call<ServicesResponse> call, Throwable t) {
+            public void onFailure(Call<List<ServiceRes>> call, Throwable t) {
 
             }
         });
