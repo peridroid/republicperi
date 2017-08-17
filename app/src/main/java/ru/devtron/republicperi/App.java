@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.facebook.stetho.Stetho;
+
 public class App extends Application {
     public static SharedPreferences sharedPreferences;
 
@@ -12,6 +14,7 @@ public class App extends Application {
         super.onCreate();
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Stetho.initializeWithDefaults(this);
     }
 
     public static SharedPreferences getSharedPreferences() {

@@ -3,10 +3,13 @@ package ru.devtron.republicperi.data;
 import android.content.SharedPreferences;
 
 import ru.devtron.republicperi.App;
+import ru.devtron.republicperi.data.network.requests.LoginReq;
 
 public class KeyValueStorage {
     private SharedPreferences mSharedPreferences;
     private final String KEY_TOKEN = "KEY_TOKEN";
+    private final String KEY_LOGIN = "KEY_LOGIN";
+    private final String KEY_PASSWORD = "KEY_PASSWORD";
     private final String KEY_USER_ID = "KEY_USER_ID";
     private static KeyValueStorage mKeyValueStorage;
 
@@ -25,7 +28,24 @@ public class KeyValueStorage {
         return mSharedPreferences.getString(KEY_TOKEN, "");
     }
 
+    public void saveToken(String token) {
+        SharedPreferences.Editor edit = mSharedPreferences.edit();
+        edit.putString(KEY_TOKEN, token);
+        edit.apply();
+    }
+
+    public void saveLogin(LoginReq loginReq) {
+        SharedPreferences.Editor edit = mSharedPreferences.edit();
+        edit.putString(KEY_LOGIN, loginReq.getEmail());
+        edit.putString(KEY_PASSWORD, loginReq.getPassword());
+        edit.apply();
+    }
+
     public String getKeyUserId() {
         return mSharedPreferences.getString(KEY_USER_ID, "");
+    }
+
+    public LoginReq getLoginReq() {
+        return new LoginReq(mSharedPreferences.getString(KEY_LOGIN, ""), mSharedPreferences.getString(KEY_PASSWORD, ""));
     }
 }
