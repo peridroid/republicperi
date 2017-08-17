@@ -19,6 +19,7 @@
     <string name="content_desc">Content description</string>
     <string name="reload">Перезагрузить</string>
     <string name="card_more_btn">Ещё</string>
+    <string name="card_add_history_button">Добавить историю</string>
     <string name="profile_name_hint">Имя фамилия</string>
     <string name="profile_email_hint">Email</string>
     <string name="auth_toolbar_title">Авторизация</string>
@@ -32,7 +33,10 @@
     <string name="card_rent_bus">Аренда автобусов и микроавтобусов</string>
     <string name="card_rent_hotel">Поселение в отеле</string>
     <string name="card_guide_services">Услуги гида</string>
-    
+
+    <string name="active_tour_status">Статус: Тур активен</string>
+    <string name="completed_tour_status">Статус: Тур завершен</string>
+
     <string name="card_nearest_tours_heading">Ближайшие туры</string>
     <string name="card_showplace_heading">Достопримечательности</string>
 

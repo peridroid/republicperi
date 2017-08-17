@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="185dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="2dp"
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="false"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="18dp"
+    >
+    <!--  old -->
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="22dp">
+
+        <TextView
+            android:id="@+id/item_title"
+            android:textColor="@color/primary_text_color"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Южные красоты Дагестана"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="14dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+
+        <RelativeLayout
+            android:layout_width="354dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintLeft_toLeftOf="@+id/item_title"
+            android:id="@+id/statusLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="56dp"
+            >
+
+            <TextView
+                android:id="@+id/status_text"
+                android:textColor="@color/status_text_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Status"/>
+
+            <TextView
+                android:id="@+id/period_text"
+                android:textAllCaps="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:text="С 05.09.2016 ПО 12.10.2016"/>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/add_history_btn"
+            style="@style/AddHistoryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginEnd="6dp"
+
+            android:text="@string/card_add_history_button"
+            android:theme="@style/BorderlessBtn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <FrameLayout
+        android:id="@+id/footer_layout"
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="#FE7373"
+        android:layout_gravity="bottom">
+
+    </FrameLayout>
+</android.support.v7.widget.CardView>

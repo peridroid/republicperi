@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 
+import ru.devtron.republicperi.ui.screen.orders_edit.OrdersEditFragment;
 import ru.devtron.republicperi.ui.screen.profile_edit.ProfileEditFragment;
 import ru.devtron.republicperi.ui.screen.service_creator.ServiceCreatorFragment;
 
@@ -20,6 +21,7 @@ public class TabAdapter extends FragmentStatePagerAdapter {
     private void initTabs() {
         mFragmentArrayList = new ArrayList<>();
         mFragmentArrayList.add(new ServiceCreatorFragment());
+        mFragmentArrayList.add(new OrdersEditFragment());
         mFragmentArrayList.add(new ProfileEditFragment());
     }
 
