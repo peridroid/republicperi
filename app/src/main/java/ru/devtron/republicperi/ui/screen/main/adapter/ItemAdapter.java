@@ -8,11 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
 import ru.devtron.republicperi.R;
+import ru.devtron.republicperi.data.CommonRepository;
 import ru.devtron.republicperi.data.network.response.BaseResponse;
 import ru.devtron.republicperi.data.network.response.PlaceRes;
 import ru.devtron.republicperi.data.network.response.TourRes;
@@ -37,7 +36,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         if (itemList.get(position) instanceof PlaceRes) {
             PlaceRes item = (PlaceRes) itemList.get(position);
             if (!TextUtils.isEmpty(item.getImg())) {
-                Picasso.with(holder.pictureImageView.getContext())
+                CommonRepository.getInstance().getPicasso()
                         .load(item.getImg())
                         .resizeDimen(R.dimen.picture_width, R.dimen.picture_height)
                         .into(holder.pictureImageView);
@@ -49,7 +48,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
         } else if (itemList.get(position) instanceof TourRes) {
             TourRes item = (TourRes) itemList.get(position);
             if (item.getImages() != null && item.getImages().size() > 0) {
-                Picasso.with(holder.pictureImageView.getContext())
+                CommonRepository.getInstance().getPicasso()
                         .load(item.getImages().get(0).src)
                         .resizeDimen(R.dimen.picture_width, R.dimen.picture_height)
                         .into(holder.pictureImageView);

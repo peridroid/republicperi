@@ -1,16 +1,23 @@
 package ru.devtron.republicperi.data.network;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import java.io.File;
+
+import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import ru.devtron.republicperi.App;
+import ru.devtron.republicperi.data.network.interceptors.CacheInterceptor;
 import ru.devtron.republicperi.data.network.interceptors.HeaderInterceptor;
+import ru.devtron.republicperi.data.network.interceptors.OfflineCacheInterceptor;
 import ru.devtron.republicperi.data.network.interceptors.TokenAuthenticator;
 import ru.devtron.republicperi.utils.Const;
 
@@ -71,6 +78,18 @@ public final class ServiceFactory {
         return client;
     }
 
+    private static Cache provideCache(Context context) {
+        int cacheSize = 10 * 1024 * 1024; // 10 MiB
+        Cache cache = null;
+        try {
+            cache = new Cache(new File(context.getCacheDir(), "http-cache"),
+                    cacheSize); // 10 MB
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cache;
+    }
+
     @NonNull
     private static OkHttpClient buildClient() {
         HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
@@ -78,7 +97,10 @@ public final class ServiceFactory {
         return new OkHttpClient.Builder()
                 .addNetworkInterceptor(new StethoInterceptor())
                 .addInterceptor(new HeaderInterceptor())
+                .addInterceptor(new OfflineCacheInterceptor())
+                .addNetworkInterceptor(new CacheInterceptor())
                 .authenticator(new TokenAuthenticator())
+                .cache(provideCache(App.getContext()))
                 .addInterceptor(loggingInterceptor)
                 .build();
     }

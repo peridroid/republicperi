@@ -21,6 +21,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import ru.devtron.republicperi.R;
 import ru.devtron.republicperi.data.CommonRepository;
+import ru.devtron.republicperi.data.KeyValueStorage;
 import ru.devtron.republicperi.data.network.response.BaseResponse;
 import ru.devtron.republicperi.data.network.response.PlaceRes;
 import ru.devtron.republicperi.data.network.response.ServiceRes;
@@ -83,7 +84,7 @@ public class MainFragment extends Fragment {
 
     private void requestItemsFromNetwork() {
         //first cardview
-        Call<List<TourRes>> callTours = CommonRepository.getInstance().getNearestTours();
+        Call<List<TourRes>> callTours = CommonRepository.getInstance().getNearestToursNetwork();
         callTours.enqueue(new Callback<List<TourRes>>() {
             @Override
             public void onResponse(Call<List<TourRes>> call, Response<List<TourRes>> response) {
@@ -99,12 +100,19 @@ public class MainFragment extends Fragment {
         });
 
         //second cardview
-        Call<List<PlaceRes>> showPlacesCall = CommonRepository.getInstance().getNearestPlaces();
+        Call<List<PlaceRes>> showPlacesCall = CommonRepository.getInstance().getNearestPlacesNetwork();
         showPlacesCall.enqueue(new Callback<List<PlaceRes>>() {
             @Override
             public void onResponse(Call<List<PlaceRes>> call, Response<List<PlaceRes>> response) {
                 if (response.isSuccessful()) {
-                    initRecyclerView(1, response.body());
+                    List<PlaceRes> placeResList = null;
+                    if (response.code() == 304) {
+                        CommonRepository.getInstance().getNearestPlacesDb();
+                    } else {
+                        placeResList = response.body();
+                        KeyValueStorage.getInstance().saveLastPlacesUpdate(response.headers().get("ETag"));
+                    }
+                    initRecyclerView(1, placeResList);
                 }
             }
 
@@ -115,7 +123,7 @@ public class MainFragment extends Fragment {
         });
 
         //third cardview
-        Call<List<ServiceRes>> servicesCall = CommonRepository.getInstance().getServices();
+        Call<List<ServiceRes>> servicesCall = CommonRepository.getInstance().getServicesNetwork();
         servicesCall.enqueue(new Callback<List<ServiceRes>>() {
             @Override
             public void onResponse(Call<List<ServiceRes>> call, Response<List<ServiceRes>> response) {

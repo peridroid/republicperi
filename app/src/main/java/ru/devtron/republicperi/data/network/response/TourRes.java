@@ -109,21 +109,4 @@ public class TourRes extends BaseResponse {
         public City city;
 
     }
-
-    public class City {
-
-        @SerializedName("id")
-        @Expose
-        public Integer id;
-        @SerializedName("lat")
-        @Expose
-        public Double lat;
-        @SerializedName("lng")
-        @Expose
-        public Double lng;
-        @SerializedName("name")
-        @Expose
-        public String name;
-
-    }
 }

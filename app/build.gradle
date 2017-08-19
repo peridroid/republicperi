@@ -1,3 +1,4 @@
+apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'com.android.application'
 
 android {
@@ -20,6 +21,11 @@ android {
     }
 }
 
+greendao {
+    schemaVersion 1
+    targetGenDir "src/main/java"
+}
+
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -37,8 +43,12 @@ dependencies {
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+
     compile 'com.facebook.stetho:stetho:1.5.0'
     compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
+
+    compile 'org.greenrobot:greendao:3.2.2'
 
     testCompile 'junit:junit:4.12'
 }

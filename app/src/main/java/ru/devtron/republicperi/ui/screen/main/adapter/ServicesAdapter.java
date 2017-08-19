@@ -8,11 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
 import ru.devtron.republicperi.R;
+import ru.devtron.republicperi.data.CommonRepository;
 import ru.devtron.republicperi.data.network.response.ServiceRes;
 
 public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.MyViewHolder> {
@@ -33,7 +32,7 @@ public class ServicesAdapter extends RecyclerView.Adapter<ServicesAdapter.MyView
         ServiceRes item = itemList.get(position);
         holder.titleTextView.setText(item.getTitle());
         if (!TextUtils.isEmpty(item.getImg())) {
-            Picasso.with(holder.pictureImageView.getContext())
+            CommonRepository.getInstance().getPicasso()
                     .load(item.getImg())
                     .resizeDimen(R.dimen.picture_width, R.dimen.picture_height)
                     .into(holder.pictureImageView);

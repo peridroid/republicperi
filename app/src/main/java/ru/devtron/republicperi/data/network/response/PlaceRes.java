@@ -3,6 +3,8 @@ package ru.devtron.republicperi.data.network.response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import ru.devtron.republicperi.data.entities.PlaceEntity;
+
 
 public class PlaceRes extends BaseResponse {
     @SerializedName("desc")
@@ -13,7 +15,7 @@ public class PlaceRes extends BaseResponse {
     private String img;
     @SerializedName("city")
     @Expose
-    private TourRes.City city;
+    private City city;
     @SerializedName("lat")
     @Expose
     private Double lat;
@@ -30,6 +32,17 @@ public class PlaceRes extends BaseResponse {
     @Expose
     private String secure;
 
+    public PlaceRes(PlaceEntity entity) {
+        this.desc = entity.getDesc();
+        this.img = entity.getImg();
+        this.city = new City(entity.getCity());
+        this.lat = entity.getLat();
+        this.lng = entity.getLng();
+        this.warning = entity.getWarning();
+        this.way = entity.getWay();
+        this.secure = entity.getSecure();
+    }
+
     public String getDesc() {
         return desc;
     }
@@ -38,7 +51,7 @@ public class PlaceRes extends BaseResponse {
         return img;
     }
 
-    public TourRes.City getCity() {
+    public City getCity() {
         return city;
     }
 

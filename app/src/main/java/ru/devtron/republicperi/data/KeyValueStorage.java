@@ -11,6 +11,11 @@ public class KeyValueStorage {
     private final String KEY_LOGIN = "KEY_LOGIN";
     private final String KEY_PASSWORD = "KEY_PASSWORD";
     private final String KEY_USER_ID = "KEY_USER_ID";
+    String[] ITEM_LAST_UPDATE_KEYS = {
+            "PRODUCT_LAST_UPDATE_TOURS",
+            "PRODUCT_LAST_UPDATE_PLACES",
+            "PRODUCT_LAST_UPDATE_SERVICES"
+    };
     private static KeyValueStorage mKeyValueStorage;
 
     public static KeyValueStorage getInstance() {
@@ -33,6 +38,17 @@ public class KeyValueStorage {
         edit.putString(KEY_TOKEN, token);
         edit.apply();
     }
+
+    public void saveLastPlacesUpdate(String eTag) {
+        SharedPreferences.Editor edit = mSharedPreferences.edit();
+        edit.putString(ITEM_LAST_UPDATE_KEYS[1], eTag);
+        edit.apply();
+    }
+
+    public String getPlacesLastUpdate() {
+        return mSharedPreferences.getString(ITEM_LAST_UPDATE_KEYS[1], "");
+    }
+
 
     public void saveLogin(LoginReq loginReq) {
         SharedPreferences.Editor edit = mSharedPreferences.edit();

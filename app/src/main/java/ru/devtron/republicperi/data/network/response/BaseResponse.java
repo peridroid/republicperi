@@ -6,12 +6,12 @@ import com.google.gson.annotations.SerializedName;
 public class BaseResponse {
     @SerializedName("id")
     @Expose
-    public Integer id;
+    public Long id;
     @SerializedName("title")
     @Expose
     public String title;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
