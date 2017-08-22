@@ -22,13 +22,23 @@
             app:contentScrim="@color/colorPrimary"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <ImageView
+           <!-- <ImageView
                 android:id="@+id/user_photo_img_profile"
                 android:layout_width="match_parent"
                 android:layout_height="260dp"
                 android:fitsSystemWindows="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ui_appbar_light"/>
+                android:src="@drawable/ui_appbar_light"/>-->
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="200dp"
+                android:layout_height="260dp"
+                android:fitsSystemWindows="true"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="Plane.json"
+                android:layout_gravity="end"
+                app:lottie_colorFilter="@color/white"
+                app:lottie_loop="true"/>
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar_profile"
@@ -47,6 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -88,11 +99,11 @@
                 <Button
                     android:id="@+id/login_btn"
                     style="@style/CustomButton"
-                    android:theme="@style/LoginBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
-                    android:text="@string/navigation_login"/>
+                    android:text="@string/navigation_login"
+                    android:theme="@style/LoginBtn"/>
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -137,25 +148,25 @@
                 <Button
                     android:id="@+id/auth_registration_btn"
                     style="@style/CustomButton"
-                    android:theme="@style/BorderlessBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
                     android:text="@string/auth_register_btn"
                     android:textAllCaps="false"
-                    android:layout_alignParentStart="true"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp"
+                    android:theme="@style/BorderlessBtn"/>
 
                 <Button
                     android:id="@+id/auth_forgot_btn"
                     style="@style/CustomButton"
-                    android:theme="@style/BorderlessBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_gravity="end"
                     android:text="@string/auth_forgot_password_btn"
                     android:textAllCaps="false"
-                    android:layout_gravity="end"
-                    android:layout_alignParentEnd="true"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp"
+                    android:theme="@style/BorderlessBtn"/>
             </RelativeLayout>
 
         </LinearLayout>
