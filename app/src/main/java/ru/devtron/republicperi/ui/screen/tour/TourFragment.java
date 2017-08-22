@@ -39,6 +39,7 @@ public class TourFragment extends Fragment {
     @BindView(R.id.error_ll)
     LinearLayout mErrorLl;
     Unbinder unbinder;
+
     private BaseResponse mModel;
 
     public static TourFragment newInstance(BaseResponse responseModel, String transitionName) {
@@ -49,6 +50,12 @@ public class TourFragment extends Fragment {
         fragment.mModel = responseModel;
         fragment.setArguments(args);
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        postponeEnterTransition();
     }
 
     @Nullable
@@ -75,7 +82,8 @@ public class TourFragment extends Fragment {
     private void initFields() {
         if (mModel instanceof TourRes) {
             if (!((TourRes) mModel).getImages().isEmpty()) {
-                CommonRepository.getInstance().getPicasso().load(((TourRes) mModel).getImages().get(0).src)
+                CommonRepository.getInstance().getPicasso()
+                        .load(((TourRes) mModel).getImages().get(0).src)
                         .into(mImage, new Callback() {
                             @Override
                             public void onSuccess() {
