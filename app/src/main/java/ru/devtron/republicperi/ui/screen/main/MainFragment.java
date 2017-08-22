@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +34,7 @@ public class MainFragment extends Fragment {
     List<RecyclerView> mRecyclerViewArrayList = new ArrayList<>();
     LinearLayout cardHolderLinear;
     int[] headings = new int[]{R.string.card_nearest_tours_heading, R.string.card_showplace_heading, R.string.menu_services};
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -70,10 +72,21 @@ public class MainFragment extends Fragment {
         } else {
             ItemAdapter adapter = new ItemAdapter(response);
             recyclerView.setAdapter(adapter);
+            setItemClick(adapter, position);
         }
     }
 
-    private void setOnMoreBtnClick(Button cardMoreBtn, int position) {
+    private void setItemClick(final ItemAdapter adapter, final int pos) {
+        adapter.setOnItemClickListener(new ItemAdapter.OnItemClickListener() {
+            @Override
+            public void onClick(int position) {
+                Toast.makeText(getContext(), "pos" + pos + " position " + position, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+    private void setOnMoreBtnClick(final Button cardMoreBtn, final int position) {
         cardMoreBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

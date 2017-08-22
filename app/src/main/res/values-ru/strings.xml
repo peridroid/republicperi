@@ -40,4 +40,8 @@
     <string name="card_nearest_tours_heading">Ближайшие туры</string>
     <string name="card_showplace_heading">Достопримечательности</string>
 
+
+
+    <string name="make_tour">Оформить тур</string>
+
 </resources>

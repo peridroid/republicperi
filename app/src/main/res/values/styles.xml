@@ -71,6 +71,20 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+
+    <style name="my_ratingbar_style" parent="android:style/Widget.Material.RatingBar.Small">
+        <item name="colorControlActivated">#F9C257</item>
+    </style>
+
+
+    <style name="tour_textview_style">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:fontFamily">medium</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="AddHistoryButton" parent="MoreButton"></style>
 
     <style name="fragment_add_service_style">

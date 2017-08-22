@@ -18,6 +18,11 @@ import ru.devtron.republicperi.data.network.response.TourRes;
 
 public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> {
     private List<? extends BaseResponse> itemList;
+    private OnItemClickListener mOnItemClickListener;
+
+    public interface OnItemClickListener {
+        void onClick(int position);
+    }
 
     public ItemAdapter(List<? extends BaseResponse> itemList) {
         this.itemList = itemList;
@@ -31,7 +36,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, int position) {
         holder.titleTextView.setText(itemList.get(position).getTitle());
         if (itemList.get(position) instanceof PlaceRes) {
             PlaceRes item = (PlaceRes) itemList.get(position);
@@ -57,21 +62,36 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             }
             holder.cityTextView.setText(item.getDots().get(0).city.name);
         }
+
+        if (mOnItemClickListener != null)
+            holder.view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mOnItemClickListener.onClick(holder.getAdapterPosition());
+                }
+            });
     }
+
 
     @Override
     public int getItemCount() {
         return itemList.size();
     }
 
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
+    }
+
     class MyViewHolder extends RecyclerView.ViewHolder {
 
+        View view;
         TextView titleTextView;
         ImageView pictureImageView;
         TextView cityTextView;
 
         MyViewHolder(View view) {
             super(view);
+            this.view = view;
             titleTextView = view.findViewById(R.id.name_tv);
             pictureImageView = view.findViewById(R.id.picture_iv);
             cityTextView = view.findViewById(R.id.city_tv);

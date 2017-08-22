@@ -110,13 +110,6 @@ public class PlaceEntity {
         myDao.update(this);
     }
 
-    /** called by internal mechanisms, do not call yourself. */
-    @Generated(hash = 1784862713)
-    public void __setDaoSession(DaoSession daoSession) {
-        this.daoSession = daoSession;
-        myDao = daoSession != null ? daoSession.getPlaceEntityDao() : null;
-    }
-
     public Long getRemoteId() {
         return this.remoteId;
     }
@@ -212,6 +205,13 @@ public class PlaceEntity {
 
     public void setLng(Double lng) {
         this.lng = lng;
+    }
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 1784862713)
+    public void __setDaoSession(DaoSession daoSession) {
+        this.daoSession = daoSession;
+        myDao = daoSession != null ? daoSession.getPlaceEntityDao() : null;
     }
 
     

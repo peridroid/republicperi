@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Избербаш"
+        android:textSize="20sp"
+        style="@style/tour_textview_style"
+        android:id="@+id/city"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/tour_textview_style"
+        android:text="27.11.2016  14:30"
+        android:id="@+id/time"/>
+
+</LinearLayout>
