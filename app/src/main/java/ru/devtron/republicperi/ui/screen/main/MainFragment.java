@@ -3,6 +3,7 @@ package ru.devtron.republicperi.ui.screen.main;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,9 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +28,10 @@ import ru.devtron.republicperi.data.network.response.BaseResponse;
 import ru.devtron.republicperi.data.network.response.PlaceRes;
 import ru.devtron.republicperi.data.network.response.ServiceRes;
 import ru.devtron.republicperi.data.network.response.TourRes;
+import ru.devtron.republicperi.ui.base.BaseActivity;
 import ru.devtron.republicperi.ui.screen.main.adapter.ItemAdapter;
 import ru.devtron.republicperi.ui.screen.main.adapter.ServicesAdapter;
+import ru.devtron.republicperi.ui.screen.tour.TourFragment;
 
 public class MainFragment extends Fragment {
     List<RecyclerView> mRecyclerViewArrayList = new ArrayList<>();
@@ -79,10 +82,9 @@ public class MainFragment extends Fragment {
     private void setItemClick(final ItemAdapter adapter, final int pos) {
         adapter.setOnItemClickListener(new ItemAdapter.OnItemClickListener() {
             @Override
-            public void onClick(int position) {
-                Toast.makeText(getContext(), "pos" + pos + " position " + position, Toast.LENGTH_SHORT).show();
-
-            }
+            public void onClick(BaseResponse model, ImageView pictureImageView) {
+                ((BaseActivity) getActivity()).setFragment(TourFragment
+                        .newInstance(model, ViewCompat.getTransitionName(pictureImageView)), pictureImageView);            }
         });
     }
 

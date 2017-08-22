@@ -1,5 +1,6 @@
 package ru.devtron.republicperi.ui.screen.main.adapter;
 
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -21,7 +22,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     private OnItemClickListener mOnItemClickListener;
 
     public interface OnItemClickListener {
-        void onClick(int position);
+        void onClick(BaseResponse position, ImageView pictureImageView);
     }
 
     public ItemAdapter(List<? extends BaseResponse> itemList) {
@@ -38,6 +39,8 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         holder.titleTextView.setText(itemList.get(position).getTitle());
+        //указываем transition name
+        ViewCompat.setTransitionName(holder.pictureImageView, itemList.get(position).getTitle() + position);
         if (itemList.get(position) instanceof PlaceRes) {
             PlaceRes item = (PlaceRes) itemList.get(position);
             if (!TextUtils.isEmpty(item.getImg())) {
@@ -67,7 +70,7 @@ public class ItemAdapter extends RecyclerView.Adapter<ItemAdapter.MyViewHolder> 
             holder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mOnItemClickListener.onClick(holder.getAdapterPosition());
+                    mOnItemClickListener.onClick(itemList.get(holder.getAdapterPosition()), holder.pictureImageView);
                 }
             });
     }
