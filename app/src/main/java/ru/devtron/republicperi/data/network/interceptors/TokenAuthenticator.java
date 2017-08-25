@@ -16,6 +16,7 @@ import ru.devtron.republicperi.data.network.response.AccessToken;
 
 public class TokenAuthenticator implements Authenticator {
     private static final String TAG = "TokenAuthenticator";
+
     @Nullable
     @Override
     public Request authenticate(Route route, Response response) throws IOException {

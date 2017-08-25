@@ -54,4 +54,6 @@
     <string name="make_tour">Make a tour</string>
 
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo lectus, sollicitudin a ipsum non, lacinia consectetur elit. Ut ut dolor eu est tincidunt gravida vel a ligula. Duis eget purus quis augue rutrum luctus sed non mi. Nam mauris quam, euismod ut commodo eu, ornare pulvinar ex. Vivamus ac massa ornare, tincidunt metus sed, semper nisl. Nam massa libero, imperdiet vel augue eget, finibus venenatis leo. Integer ultrices accumsan mi non feugiat. Fusce volutpat dui sit amet ornare tincidunt. Vestibulum nunc odio, molestie tincidunt aliquet et, aliquam nec leo. Integer gravida magna molestie tortor maximus eleifend. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed vestibulum, eros ultrices dignissim tempor, urna justo pretium est, eget placerat dolor massa et neque. Ut sollicitudin facilisis suscipit.</string>
+    <string name="error_max_count">Можно добавлять не больше 6 фотографи</string>
+    <string name="photo_picker_title">Выберите фотографии</string>
 </resources>

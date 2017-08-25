@@ -43,5 +43,7 @@
 
 
     <string name="make_tour">Оформить тур</string>
+    <string name="error_max_count">Можно добавлять не больше 6 фотографий</string>
+    <string name="photo_picker_title">Выберите фотографии</string>
 
 </resources>

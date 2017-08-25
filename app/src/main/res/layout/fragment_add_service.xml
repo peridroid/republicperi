@@ -1,119 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/fragment_add_service_style"
-        >
-
-        <EditText
-            android:id="@+id/name_service"
-            style="@style/auth_et_style"
-            android:hint="Название услуги"
-            android:inputType="text"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/fragment_add_service_style">
-
-        <EditText
-            android:id="@+id/video_service"
-            style="@style/auth_et_style"
-            android:hint="Видео (если есть)"
-            android:inputType="text"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/fragment_add_service_style"
-        >
-
-        <EditText
-            android:id="@+id/description_service"
-            style="@style/auth_et_style"
-            android:hint="Описание"
-            android:inputType="text"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <ImageButton
-        android:layout_width="match_parent"
-        android:layout_height="130dp"
-        android:src="@drawable/camera_selector_btn"
-        android:background="@drawable/test"
-        style="@style/fragment_add_service_style"
-        />
+<android.support.v4.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        style="@style/fragment_add_service_style"
-        >
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:srcCompat="@drawable/ic_plus_24"
-            android:background="@drawable/test"
-            />
-
-
-        <Space
-            android:layout_width="wrap_content"
+        <android.support.design.widget.TextInputLayout
+            style="@style/fragment_add_service_style"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            >
 
-        <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:srcCompat="@drawable/ic_plus_24"
-            android:background="@drawable/test"
-            />
+            <EditText
+                android:id="@+id/name_service"
+                style="@style/auth_et_style"
+                android:hint="Название услуги"
+                android:inputType="text"/>
+        </android.support.design.widget.TextInputLayout>
 
-        <Space
-            android:layout_width="wrap_content"
+        <android.support.design.widget.TextInputLayout
+            style="@style/fragment_add_service_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/video_service"
+                style="@style/auth_et_style"
+                android:hint="Видео (если есть)"
+                android:inputType="text"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            style="@style/fragment_add_service_style"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            >
+
+            <EditText
+                android:id="@+id/description_service"
+                style="@style/auth_et_style"
+                android:hint="Описание"
+                android:inputType="text"/>
+        </android.support.design.widget.TextInputLayout>
 
         <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:srcCompat="@drawable/ic_plus_24"
+            android:id="@+id/select_photo_btn"
+            style="@style/fragment_add_service_style"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
             android:background="@drawable/test"
+            android:src="@drawable/camera_selector_btn"
             />
 
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-        <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:srcCompat="@drawable/ic_plus_24"
-            android:background="@drawable/test"
-            />
-
-        <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-        <ImageButton
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:srcCompat="@drawable/ic_plus_24"
-            android:background="@drawable/test"
-            />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            style="@style/fragment_add_service_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
-    
-</LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

@@ -79,19 +79,6 @@ public class TourRes extends BaseResponse {
 
     }
 
-    public class Image {
-
-        @SerializedName("id")
-        @Expose
-        public Integer id;
-        @SerializedName("id_tour")
-        @Expose
-        public Integer idTour;
-        @SerializedName("src")
-        @Expose
-        public String src;
-
-    }
 
     public class Dot {
 

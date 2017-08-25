@@ -14,7 +14,6 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.animation.AccelerateInterpolator;
 import android.view.inputmethod.InputMethodManager;
 
@@ -22,9 +21,6 @@ import ru.devtron.republicperi.R;
 import ru.devtron.republicperi.ui.screen.profile.adapter.TabAdapter;
 
 public class ProfileActivity extends AppCompatActivity {
-
-    private static final String TAG = "ProfileActivity";
-
     CollapsingToolbarLayout mCollapsingToolbarLayout;
     ViewPager mViewPager;
     TabLayout mTabLayout;
@@ -104,10 +100,6 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onPageScrolled(int position, float positionOffs, int positionOffsetPixels) {
                 float positionOffset = 1 - positionOffs;
-
-                Log.i(TAG, "onPageScrolled: position + " + position + " positionOffset " + positionOffset + " positionOffsetPixels " + positionOffsetPixels);
-
-
                 if ((position == adapter.getCount() - 1 && positionOffset == 1) ||
                         position < adapter.getCount() - 2)
                     return;
