@@ -94,4 +94,8 @@
         <item name="android:layout_marginRight">32dp</item>
     </style>
 
+    <style name="CustomDialog">
+        <item name="android:fullDark">@android:color/transparent</item>
+    </style>
+
 </resources>

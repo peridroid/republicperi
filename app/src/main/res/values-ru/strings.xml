@@ -21,9 +21,11 @@
     <string name="card_more_btn">Ещё</string>
     <string name="card_add_history_button">Добавить историю</string>
     <string name="profile_name_hint">Имя фамилия</string>
+    <string name="profile_surname_hint">Фамилия</string>
     <string name="profile_email_hint">Email</string>
     <string name="auth_toolbar_title">Авторизация</string>
     <string name="auth_password_hint">Пароль</string>
+    <string name="auth_confirm_password_hint">Подтвердите пароль</string>
     <string name="auth_register_btn">Регистрация</string>
     <string name="auth_forgot_password_btn">Забыли пароль?</string>
     <string name="registr_auth_btn">Авторизация</string>

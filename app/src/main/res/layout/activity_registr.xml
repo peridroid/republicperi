@@ -51,6 +51,7 @@
             android:paddingRight="24dp">
 
             <android.support.design.widget.TextInputLayout
+                android:id="@+id/email_til"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -88,6 +89,17 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/registr_phone_et"
+                    style="@style/registr_et_style"
+                    android:hint="Телефон"
+                    android:inputType="phone"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
                     android:id="@+id/registr_password_et"
                     style="@style/registr_et_style"
                     android:hint="@string/auth_password_hint"
@@ -118,7 +130,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <Button
-                    android:id="@+id/registr_auth_btn"
+                    android:id="@+id/auth_btn"
                     style="@style/CustomButton"
                     android:theme="@style/BorderlessBtn"
                     android:layout_width="wrap_content"

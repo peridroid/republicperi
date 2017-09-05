@@ -2,17 +2,22 @@
     <string name="app_name">Republic</string>
 
     <!-- Fonts -->
-    <string name="roboto_regular">sans-serif</string>
-    <string name="roboto_light">sans-serif-light</string>
-    <string name="roboto_condensed">sans-serif-condensed</string>
-    <string name="roboto_black">sans-serif-black</string>
-    <string name="roboto_thin">sans-serif-thin</string>
-    <string name="roboto_medium">sans-serif-medium</string>
+    <string translatable="false" name="roboto_regular">sans-serif</string>
+    <string translatable="false" name="roboto_light">sans-serif-light</string>
+    <string translatable="false" name="roboto_condensed">sans-serif-condensed</string>
+    <string translatable="false" name="roboto_black">sans-serif-black</string>
+    <string translatable="false" name="roboto_thin">sans-serif-thin</string>
+    <string translatable="false" name="roboto_medium">sans-serif-medium</string>
+
+    <!--Social-->
+    <integer name="com_vk_sdk_AppId">6174625</integer>
+    <string name="facebook_app_id" translatable="false">521892981483261</string>
+    <string name="twitter_api_key">Ad7G6ftzhgKxRCMPw2k3c9RQY</string>
+    <string name="twitter_api_secret">QLoBDB2Th84ZwKWi6uo7WjEuBhDqXmAOUardUAeMSHuw8Mff9w</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="action_settings">Settings</string>
     <string name="menu_home">Home</string>
     <string name="menu_places">Places</string>
     <string name="menu_tours">Tours</string>
@@ -53,7 +58,7 @@
 
     <string name="make_tour">Make a tour</string>
 
-    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo lectus, sollicitudin a ipsum non, lacinia consectetur elit. Ut ut dolor eu est tincidunt gravida vel a ligula. Duis eget purus quis augue rutrum luctus sed non mi. Nam mauris quam, euismod ut commodo eu, ornare pulvinar ex. Vivamus ac massa ornare, tincidunt metus sed, semper nisl. Nam massa libero, imperdiet vel augue eget, finibus venenatis leo. Integer ultrices accumsan mi non feugiat. Fusce volutpat dui sit amet ornare tincidunt. Vestibulum nunc odio, molestie tincidunt aliquet et, aliquam nec leo. Integer gravida magna molestie tortor maximus eleifend. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed vestibulum, eros ultrices dignissim tempor, urna justo pretium est, eget placerat dolor massa et neque. Ut sollicitudin facilisis suscipit.</string>
+    <string translatable="false" name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam justo lectus, sollicitudin a ipsum non, lacinia consectetur elit. Ut ut dolor eu est tincidunt gravida vel a ligula. Duis eget purus quis augue rutrum luctus sed non mi. Nam mauris quam, euismod ut commodo eu, ornare pulvinar ex. Vivamus ac massa ornare, tincidunt metus sed, semper nisl. Nam massa libero, imperdiet vel augue eget, finibus venenatis leo. Integer ultrices accumsan mi non feugiat. Fusce volutpat dui sit amet ornare tincidunt. Vestibulum nunc odio, molestie tincidunt aliquet et, aliquam nec leo. Integer gravida magna molestie tortor maximus eleifend. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed vestibulum, eros ultrices dignissim tempor, urna justo pretium est, eget placerat dolor massa et neque. Ut sollicitudin facilisis suscipit.</string>
     <string name="error_max_count">Можно добавлять не больше 6 фотографи</string>
     <string name="photo_picker_title">Выберите фотографии</string>
 </resources>
