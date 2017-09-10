@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import butterknife.OnTextChanged;
 import ru.devtron.republicperi.R;
 import ru.devtron.republicperi.utils.validator.EmailValidator;
@@ -43,6 +45,8 @@ public class RepairActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_repair);
+        ButterKnife.bind(this);
+
         mToolbar = findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
@@ -53,7 +57,7 @@ public class RepairActivity extends AppCompatActivity {
 
     @OnTextChanged(value = { R.id.repair_email_et },
             callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
-    public void onTextChanged() {
+    public void onTextChanged(Editable editable) {
         mLoginBtn.setEnabled(false);
 
         Log.i(TAG, "FUCK");
