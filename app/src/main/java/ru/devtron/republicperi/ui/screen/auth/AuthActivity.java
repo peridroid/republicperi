@@ -3,6 +3,7 @@ package ru.devtron.republicperi.ui.screen.auth;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
@@ -31,6 +32,7 @@ import java.util.Collections;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.OnTextChanged;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -48,6 +50,10 @@ import ru.devtron.republicperi.ui.base.BaseActivity;
 import ru.devtron.republicperi.ui.screen.registr.RegistrActivity;
 import ru.devtron.republicperi.ui.screen.repair.RepairActivity;
 import ru.devtron.republicperi.utils.Const;
+import ru.devtron.republicperi.utils.validator.EmailValidator;
+import ru.devtron.republicperi.utils.validator.EmptyValidator;
+import ru.devtron.republicperi.utils.validator.Validator;
+import ru.devtron.republicperi.utils.validator.ValidatorsComposer;
 
 import static ru.devtron.republicperi.ui.screen.auth.AuthActivity.SocialSdkType.TWITTER;
 
@@ -58,12 +64,20 @@ public class AuthActivity extends BaseActivity {
 	EditText mAuthEmailEt;
 	@BindView(R.id.auth_password_et)
 	EditText mAuthPasswordEt;
+	@BindView(R.id.email_til)
+    TextInputLayout mEmailTil;
+	@BindView(R.id.password_til)
+    TextInputLayout mPasswordTil;
 	private Button mBtnForRepairAtivity;
 	private Button mLoginBtn;
 
 	private LoginManager mLoginManager;
 	private CallbackManager mCallbackManager;
 	private TwitterAuthClient mTwitterAuthClient;
+
+	final ValidatorsComposer<String> emptinessValidatorComposer = new ValidatorsComposer<>(new EmptyValidator());
+	final ValidatorsComposer<String> emailValidatorComposer = new ValidatorsComposer<>(new EmptyValidator(), new EmailValidator());
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -307,4 +321,28 @@ public class AuthActivity extends BaseActivity {
 			onSocialCancel();
 		}
 	}
+
+    @OnTextChanged(value = {R.id.auth_email_et, R.id.auth_password_et},
+            callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
+    public void onTextChanged() {
+        mLoginBtn.setEnabled(false);
+
+        mEmailTil.setErrorEnabled(false);
+        if(!emailValidatorComposer.isValid(mAuthEmailEt.getText().toString())){
+            showFieldError(mEmailTil, emailValidatorComposer.getDescription());
+            return;
+        }
+
+
+        mPasswordTil.setErrorEnabled(false);
+
+        mLoginBtn.setEnabled(true);
+    }
+
+    void showFieldError(TextInputLayout til, String error) {
+        til.setErrorEnabled(true);
+        til.setError(error);
+        mLoginBtn.setEnabled(false);
+    }
+
 }

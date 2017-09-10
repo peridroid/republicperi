@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,9 +29,11 @@ import ru.devtron.republicperi.ui.screen.auth.AuthActivity;
 import ru.devtron.republicperi.ui.screen.repair.RepairActivity;
 import ru.devtron.republicperi.utils.validator.EmailValidator;
 import ru.devtron.republicperi.utils.validator.EmptyValidator;
+import ru.devtron.republicperi.utils.validator.PhoneValidator;
 import ru.devtron.republicperi.utils.validator.ValidatorsComposer;
 
 public class RegistrActivity extends AppCompatActivity {
+    private static final String TAG = "RegistrActivity";
     @BindView(R.id.registr_email_et)
     EditText mRegistrEmailEt;
     @BindView(R.id.registr_surname_et)
@@ -47,6 +50,16 @@ public class RegistrActivity extends AppCompatActivity {
     Button mLoginBtn;
     @BindView(R.id.email_til)
     TextInputLayout mEmailTil;
+    @BindView(R.id.surname_til)
+    TextInputLayout mSurnameTil;
+    @BindView(R.id.name_til)
+    TextInputLayout mNameTil;
+    @BindView(R.id.phone_til)
+    TextInputLayout mPhoneTil;
+    @BindView(R.id.password_til)
+    TextInputLayout mPasswordTil;
+    @BindView(R.id.confirm_password_til)
+    TextInputLayout mConfirmPasswordTil;
     @BindView(R.id.auth_btn)
     Button mRegistrAuthBtn;
     @BindView(R.id.registr_forgot_password_btn)
@@ -54,6 +67,7 @@ public class RegistrActivity extends AppCompatActivity {
 
     final ValidatorsComposer<String> emptinessValidatorComposer = new ValidatorsComposer<>(new EmptyValidator());
     final ValidatorsComposer<String> emailEmptyValidatorComposer = new ValidatorsComposer<>(new EmptyValidator(), new EmailValidator());
+    final ValidatorsComposer<String> phoneEmptyValidatorComposer = new ValidatorsComposer<>(new EmptyValidator(), new PhoneValidator());
 
     private View.OnClickListener mOnClickListener = new View.OnClickListener() {
         @Override
@@ -103,12 +117,40 @@ public class RegistrActivity extends AppCompatActivity {
         });
     }
 
-    @OnTextChanged(value = {R.id.registr_email_et, R.id.registr_surname_et, R.id.registr_name_et }, 
+    @OnTextChanged(value = {R.id.registr_email_et, R.id.registr_surname_et, R.id.registr_name_et,
+            R.id.registr_phone_et, R.id.registr_password_et, R.id.registr_confirm_password_et },
             callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     public void onTextChanged() {
+        mLoginBtn.setEnabled(false);
+
         mEmailTil.setErrorEnabled(false);
         if (!emailEmptyValidatorComposer.isValid(mRegistrEmailEt.getText().toString())) {
             showFieldError(mEmailTil, emailEmptyValidatorComposer.getDescription());
+            return;
+        }
+
+        mSurnameTil.setErrorEnabled(false);
+        if (!emptinessValidatorComposer.isValid(mRegistrSurnameEt.getText().toString())){
+            showFieldError(mSurnameTil, emptinessValidatorComposer.getDescription());
+            return;
+        }
+
+        mNameTil.setErrorEnabled(false);
+        if (!emptinessValidatorComposer.isValid(mRegistrNameEt.getText().toString())){
+            showFieldError(mNameTil, emptinessValidatorComposer.getDescription());
+            return;
+        }
+
+        mPhoneTil.setErrorEnabled(false);
+        if (!phoneEmptyValidatorComposer.isValid(mRegistrPhoneEt.getText().toString())) {
+            showFieldError(mPhoneTil, phoneEmptyValidatorComposer.getDescription());
+            return;
+        }
+
+        mConfirmPasswordTil.setErrorEnabled(false);
+        if(!mRegistrConfirmPasswordEt.getText().toString()
+                .equals(mRegistrPasswordEt.getText().toString())){
+            showFieldError(mConfirmPasswordTil, "Пароли не совпадают");
             return;
         }
 
