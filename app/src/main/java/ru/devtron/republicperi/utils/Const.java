@@ -21,4 +21,11 @@ public interface Const {
     int PERMISSION_REQUEST_CAMERA = 87;
     int REQUEST_CAMERA_PICTURE = 99;
     int REQUEST_GALLERY_PICTURE = 88;
+
+    //region ==================== Notifications ====================
+    int PUSH_REQ_CODE = 535;
+    int NOTIFICATION_MANAGER_ID = 7;
+    CharSequence NOTIFICATION_URGENT_TOUR_TYPE = "NOTIFICATION_URGENT_TOUR_TYPE";
+    CharSequence NOTIFICATION_ACTION_TYPE = "NOTIFICATION_ACTION_TYPE";
+    //endregion
 }
