@@ -26,6 +26,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.firebase.crash.FirebaseCrash;
+
 import java.io.File;
 import java.io.IOException;
 
@@ -192,6 +194,8 @@ public class ServiceCreatorFragment extends Fragment
         try {
             photoFile = Utils.createTempFile(getContext());
         } catch (IOException e) {
+            FirebaseCrash.log("Попытка создать файл");
+            FirebaseCrash.report(e);
             e.printStackTrace();
         }
         if (photoFile != null) {

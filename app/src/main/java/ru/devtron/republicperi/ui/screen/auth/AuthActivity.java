@@ -3,8 +3,10 @@ package ru.devtron.republicperi.ui.screen.auth;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,6 +18,19 @@ import com.facebook.FacebookException;
 import com.facebook.internal.CallbackManagerImpl;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.twitter.sdk.android.core.Result;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
@@ -38,6 +53,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import ru.devtron.republicperi.R;
 import ru.devtron.republicperi.data.CommonRepository;
+import ru.devtron.republicperi.data.FirebaseManager;
 import ru.devtron.republicperi.data.KeyValueStorage;
 import ru.devtron.republicperi.data.network.requests.LoginReq;
 import ru.devtron.republicperi.data.network.requests.SocialLoginReq;
@@ -57,7 +73,9 @@ import ru.devtron.republicperi.utils.validator.ValidatorsComposer;
 
 import static ru.devtron.republicperi.ui.screen.auth.AuthActivity.SocialSdkType.TWITTER;
 
-public class AuthActivity extends BaseActivity {
+public class AuthActivity extends BaseActivity implements GoogleApiClient.OnConnectionFailedListener {
+	private static final int RC_SIGN_IN = 123;
+	private static final String TAG = AuthActivity.class.getSimpleName();
 	Toolbar mToolbar;
 	Button mBtnForRegistAtivity;
 	@BindView(R.id.auth_email_et)
@@ -77,8 +95,14 @@ public class AuthActivity extends BaseActivity {
 
 	final ValidatorsComposer<String> emptinessValidatorComposer = new ValidatorsComposer<>(new EmptyValidator());
 	final ValidatorsComposer<String> emailValidatorComposer = new ValidatorsComposer<>(new EmptyValidator(), new EmailValidator());
+	private GoogleApiClient mGoogleApiClient;
 
 
+	@OnClick(R.id.google_plus_social_btn)
+	public void onGooglePlusClick() {
+		Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+		startActivityForResult(signInIntent, RC_SIGN_IN);
+	}
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -105,6 +129,21 @@ public class AuthActivity extends BaseActivity {
 		if (mTwitterAuthClient == null) mTwitterAuthClient = new TwitterAuthClient();
 
 		mLoginManager.registerCallback(mCallbackManager, facebookCallback);
+
+		// Configure sign-in to request the user's ID, email address, and basic
+		// profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+				.requestEmail()
+				.build();
+
+
+		// Build a GoogleApiClient with access to the Google Sign-In API and the
+		// options specified by gso.
+		mGoogleApiClient = new GoogleApiClient.Builder(this)
+				.enableAutoManage(this, this)
+				.addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+				.build();
+
 	}
 
 	@OnClick(R.id.vk_social_btn)
@@ -295,6 +334,11 @@ public class AuthActivity extends BaseActivity {
 		showMessage("Авторизация отменена");
 	}
 
+	@Override
+	public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+		Log.d(TAG, "onConnectionFailed: ");
+	}
+
 	enum SocialSdkType {
 		VK,
 		FACEBOOK,
@@ -315,6 +359,19 @@ public class AuthActivity extends BaseActivity {
 			mTwitterAuthClient.onActivityResult(requestCode, resultCode, intent);
 		}
 
+		// Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+		if (requestCode == RC_SIGN_IN) {
+			GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(intent);
+			if (result.isSuccess()) {
+				// Google Sign In was successful, authenticate with Firebase
+				GoogleSignInAccount account = result.getSignInAccount();
+				firebaseAuthWithGoogle(account);
+			} else {
+				// Google Sign In failed, update UI appropriately
+				// ...
+			}
+		}
+
 		if (resultCode == Activity.RESULT_CANCELED &&
 				(requestCode == VKServiceActivity.VKServiceType.Authorization.getOuterCode() ||
 						requestCode == CallbackManagerImpl.RequestCodeOffset.Login.toRequestCode())) {
@@ -322,7 +379,35 @@ public class AuthActivity extends BaseActivity {
 		}
 	}
 
-    @OnTextChanged(value = {R.id.auth_email_et, R.id.auth_password_et},
+	private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
+		Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
+
+		AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+		FirebaseManager.getInstance().getAuth()
+				.signInWithCredential(credential)
+				.addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+					@Override
+					public void onComplete(@NonNull Task<AuthResult> task) {
+						if (task.isSuccessful()) {
+							// Sign in success, update UI with the signed-in user's information
+							Log.d(TAG, "signInWithCredential:success");
+							FirebaseUser user = FirebaseManager.getInstance().getAuth().getCurrentUser();
+							if (user != null) {
+								showMessage(user.getDisplayName());
+							}
+						} else {
+							// If sign in fails, display a message to the user.
+							Log.d(TAG, "signInWithCredential:failure", task.getException());
+							Toast.makeText(AuthActivity.this, "Authentication failed.",
+									Toast.LENGTH_SHORT).show();
+						}
+
+						// ...
+					}
+				});
+	}
+
+	@OnTextChanged(value = {R.id.auth_email_et, R.id.auth_password_et},
             callback = OnTextChanged.Callback.AFTER_TEXT_CHANGED)
     public void onTextChanged() {
         mLoginBtn.setEnabled(false);

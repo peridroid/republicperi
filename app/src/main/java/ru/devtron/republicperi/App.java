@@ -4,9 +4,14 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.facebook.stetho.Stetho;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
+import com.google.firebase.remoteconfig.FirebaseRemoteConfigSettings;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterApiClient;
@@ -24,58 +29,81 @@ import ru.devtron.republicperi.data.entities.DaoMaster;
 import ru.devtron.republicperi.data.entities.DaoSession;
 
 public class App extends Application {
-    public static SharedPreferences sharedPreferences;
-    private static Context sContext;
-    private static DaoSession sDaoSession;
+	public static SharedPreferences sharedPreferences;
+	private static Context sContext;
+	private static DaoSession sDaoSession;
 
-    public static Context getContext() {
-        return sContext;
-    }
+	public static Context getContext() {
+		return sContext;
+	}
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        sContext = getApplicationContext();
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        Stetho.initializeWithDefaults(this);
+	@Override
+	public void onCreate() {
+		super.onCreate();
+		sContext = getApplicationContext();
+		sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+		Stetho.initializeWithDefaults(this);
 
-        DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "republic-db");
-        Database db = helper.getWritableDb();
-        sDaoSession = new DaoMaster(db).newSession();
+		DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "republic-db");
+		Database db = helper.getWritableDb();
+		sDaoSession = new DaoMaster(db).newSession();
 
-        VKSdk.initialize(this);
+		final FirebaseRemoteConfig mRemoteConfig = FirebaseRemoteConfig.getInstance();
 
-        TwitterConfig config = new TwitterConfig.Builder(this)
-                .logger(new DefaultLogger(Log.DEBUG))
-                .twitterAuthConfig(new TwitterAuthConfig(getString(R.string.twitter_api_key),
-                        getString(R.string.twitter_api_secret)))
-                .debug(BuildConfig.DEBUG)
-                .build();
-        Twitter.initialize(config);
+		FirebaseRemoteConfigSettings firebaseConfig = new FirebaseRemoteConfigSettings.Builder()
+				.setDeveloperModeEnabled(BuildConfig.DEBUG)
+				.build();
+		mRemoteConfig.setConfigSettings(firebaseConfig);
 
-        final HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
-        final OkHttpClient customClient = new OkHttpClient.Builder()
-                .addInterceptor(loggingInterceptor).build();
+		mRemoteConfig.setDefaults(R.xml.remote_config_defaults); // по дефолту
 
-        final TwitterSession activeSession = TwitterCore.getInstance()
-                .getSessionManager().getActiveSession();
+		long cache = 3600;
 
-        final TwitterApiClient customApiClient;
-        if (activeSession != null) {
-            customApiClient = new TwitterApiClient(activeSession, customClient);
-            TwitterCore.getInstance().addApiClient(activeSession, customApiClient);
-        } else {
-            customApiClient = new TwitterApiClient(customClient);
-            TwitterCore.getInstance().addGuestApiClient(customApiClient);
-        }
-    }
+		if (mRemoteConfig.getInfo().getConfigSettings().isDeveloperModeEnabled()) {
+			cache = 0;
+		}
 
-    public static SharedPreferences getSharedPreferences() {
-        return sharedPreferences;
-    }
+		//получаем изменения с firebase
+		mRemoteConfig.fetch(cache).addOnCompleteListener(new OnCompleteListener<Void>() {
+			@Override
+			public void onComplete(@NonNull Task<Void> task) {
+				mRemoteConfig.activateFetched(); // применяем
+			}
+		});
 
-    public static DaoSession getDaoSession() {
-        return sDaoSession;
-    }
+		VKSdk.initialize(this);
+
+		TwitterConfig twitterConfig = new TwitterConfig.Builder(this)
+				.logger(new DefaultLogger(Log.DEBUG))
+				.twitterAuthConfig(new TwitterAuthConfig(getString(R.string.twitter_api_key),
+						getString(R.string.twitter_api_secret)))
+				.debug(BuildConfig.DEBUG)
+				.build();
+		Twitter.initialize(twitterConfig);
+
+		final HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+		loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.HEADERS);
+		final OkHttpClient customClient = new OkHttpClient.Builder()
+				.addInterceptor(loggingInterceptor).build();
+
+		final TwitterSession activeSession = TwitterCore.getInstance()
+				.getSessionManager().getActiveSession();
+
+		final TwitterApiClient customApiClient;
+		if (activeSession != null) {
+			customApiClient = new TwitterApiClient(activeSession, customClient);
+			TwitterCore.getInstance().addApiClient(activeSession, customApiClient);
+		} else {
+			customApiClient = new TwitterApiClient(customClient);
+			TwitterCore.getInstance().addGuestApiClient(customApiClient);
+		}
+	}
+
+	public static SharedPreferences getSharedPreferences() {
+		return sharedPreferences;
+	}
+
+	public static DaoSession getDaoSession() {
+		return sDaoSession;
+	}
 }
