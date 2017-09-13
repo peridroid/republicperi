@@ -96,7 +96,7 @@ public class NotificationHelper {
 
 		if (!TextUtils.isEmpty(type)) {
 			if (TextUtils.equals(type, Const.NOTIFICATION_URGENT_TOUR_TYPE)) {
-				builder.addAction(R.drawable.ic_announcement_black_24dp, "Срочный тур", resultIntent);
+				builder.addAction(R.drawable.ic_announcement_black_24dp, "Горящий тур", resultIntent);
 			} else if (TextUtils.equals(type, Const.NOTIFICATION_ACTION_TYPE)) {
 				builder.addAction(R.drawable.ic_sale, "Успеть на акцию", resultIntent);
 			}

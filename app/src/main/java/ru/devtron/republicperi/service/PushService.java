@@ -7,7 +7,6 @@ import ru.devtron.republicperi.utils.NotificationHelper;
 
 
 public class PushService extends FirebaseMessagingService {
-	private static final String TAG = "PushService";
 
 	@Override
 	public void onMessageReceived(RemoteMessage remoteMessage) {
