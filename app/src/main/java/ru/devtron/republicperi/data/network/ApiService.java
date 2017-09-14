@@ -2,11 +2,15 @@ package ru.devtron.republicperi.data.network;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 import retrofit2.http.Url;
 import ru.devtron.republicperi.data.network.requests.LoginReq;
@@ -23,28 +27,44 @@ import ru.devtron.republicperi.data.network.response.VkProfileRes;
 import ru.devtron.republicperi.utils.Const;
 
 public interface ApiService {
-	@GET("tours")
-	Call<List<TourRes>> getTours();
-	@GET("category/services")
-	Call<List<ServiceRes>> getServices();
-	@GET("places")
-	Call<List<PlaceRes>> getPlaces(@Header(Const.ETAG_HEADER) String lastMod);
-	@GET("me")
-	Call<ProfileRes> getUserInfo();
+    @GET("tours")
+    Call<List<TourRes>> getTours();
 
-	//region ==================== AUTH ====================
+    @GET("category/services")
+    Call<List<ServiceRes>> getServices();
 
-	@POST("signup")
-	Call<AccessToken> signUp(@Body SignUpReq signUpReq);
-	@POST("login")
-	Call<AccessToken> loginUser(@Body LoginReq login);
-	//social
-	@POST("o-auth")
-	Call<UserRes> socialLogin(@Body SocialLoginReq userSocReq);
-	@GET
-	Call<VkProfileRes> getVkProfile(@Url String baseVkApiUrl, @Query("access_token") String vkToken);
-	@GET
-	Call<FacebookProfileRes> getFacebookProfile(@Url String baseUrl, @Query("access_token") String accessToken);
-	//endregion
+    @GET("places")
+    Call<List<PlaceRes>> getPlaces(@Header(Const.ETAG_HEADER) String lastMod);
+
+    @GET("me")
+    Call<ProfileRes> getUserInfo();
+
+    //region ==================== AUTH ====================
+
+    @POST("signup")
+    Call<AccessToken> signUp(@Body SignUpReq signUpReq);
+
+    @POST("login")
+    Call<AccessToken> loginUser(@Body LoginReq login);
+
+    //social
+    @POST("o-auth")
+    Call<UserRes> socialLogin(@Body SocialLoginReq userSocReq);
+
+    @GET
+    Call<VkProfileRes> getVkProfile(@Url String baseVkApiUrl, @Query("access_token") String vkToken);
+
+    @GET
+    Call<FacebookProfileRes> getFacebookProfile(@Url String baseUrl, @Query("access_token") String accessToken);
+    //endregion
+
+
+    //region =================== Profile ===================
+
+    @Multipart
+    @POST("me/avatar")
+    Call<ResponseBody> uploadAvatar(@Part MultipartBody.Part avatar);
+
+    //endregion
 
 }

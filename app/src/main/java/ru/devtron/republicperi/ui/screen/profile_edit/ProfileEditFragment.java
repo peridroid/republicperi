@@ -56,14 +56,14 @@ public class ProfileEditFragment extends Fragment {
     }
 
     private void initUserData(ProfileRes profile) {
-        if (!TextUtils.isEmpty(profile.getImg())) {
+        if (!TextUtils.isEmpty(profile.getUser().getImg())) {
             Picasso.with(getContext())
-                    .load(profile.getImg())
+                    .load(profile.getUser().getImg())
                     .resizeDimen(R.dimen.picture_width, R.dimen.picture_height)
                     .into(avatarImageView);
         }
-        emailEt.setText(profile.getEmail());
-        nameEt.setText(profile.getName());
-        surnameEt.setText(profile.getSurname());
+        emailEt.setText(profile.getUser().getEmail());
+        nameEt.setText(profile.getUser().getName());
+        surnameEt.setText(profile.getUser().getSourname());
     }
 }

@@ -1,7 +1,5 @@
 package ru.devtron.republicperi.data;
 
-import android.util.Log;
-
 import com.facebook.login.LoginManager;
 import com.squareup.picasso.Picasso;
 import com.twitter.sdk.android.core.TwitterApiClient;
@@ -14,6 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import ru.devtron.republicperi.App;
@@ -84,6 +84,10 @@ public class CommonRepository {
 			placeResList.add(new PlaceRes(placeEntity));
 		}
 		return placeResList;
+	}
+
+	public Call<ResponseBody> setAvatar(MultipartBody.Part part){
+		return mApiService.uploadAvatar(part);
 	}
 
 	public Call<List<ServiceRes>> getServicesNetwork() {

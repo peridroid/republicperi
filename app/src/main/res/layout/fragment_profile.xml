@@ -18,14 +18,15 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/avatar_image_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
             android:background="@drawable/ic_user_avatar"/>
 
         <Button
             style="@style/BorderlessBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/change_photo_btn"
             android:layout_marginLeft="16dp"
             android:text="Изменить фотографию"
             android:theme="@style/BorderlessBtn"/>
@@ -93,6 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Сохранить"
+        android:id="@+id/saveBtn"
         android:layout_marginTop="36dp"
         android:theme="@style/LoginBtn"/>
 

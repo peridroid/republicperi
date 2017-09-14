@@ -7,6 +7,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,25 +19,29 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import ru.devtron.republicperi.R;
-import ru.devtron.republicperi.data.CommonRepository;
-import ru.devtron.republicperi.data.KeyValueStorage;
 import ru.devtron.republicperi.data.network.response.BaseResponse;
-import ru.devtron.republicperi.data.network.response.PlaceRes;
 import ru.devtron.republicperi.data.network.response.ServiceRes;
-import ru.devtron.republicperi.data.network.response.TourRes;
 import ru.devtron.republicperi.ui.base.BaseActivity;
 import ru.devtron.republicperi.ui.screen.main.adapter.ItemAdapter;
 import ru.devtron.republicperi.ui.screen.main.adapter.ServicesAdapter;
 import ru.devtron.republicperi.ui.screen.tour.TourFragment;
 
-public class MainFragment extends Fragment {
+public class MainFragment extends Fragment implements MainView {
+
+    public static final String TAG = "MainFragmentTag";
+
     List<RecyclerView> mRecyclerViewArrayList = new ArrayList<>();
     LinearLayout cardHolderLinear;
     int[] headings = new int[]{R.string.card_nearest_tours_heading, R.string.card_showplace_heading, R.string.menu_services};
+
+    private MainPresenter mMainPresenter;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mMainPresenter = MainPresenter.getInstance();
+    }
 
     @Nullable
     @Override
@@ -45,7 +50,10 @@ public class MainFragment extends Fragment {
         cardHolderLinear = view.findViewById(R.id.card_holder_ll);
 
         generateCardViews();
-        requestItemsFromNetwork();
+
+        mMainPresenter.takeView(this);
+        mMainPresenter.initView();
+
         return view;
     }
 
@@ -64,7 +72,8 @@ public class MainFragment extends Fragment {
         }
     }
 
-    private void initRecyclerView(int position, List<? extends BaseResponse> response) {
+    @Override
+    public void initRecyclerView(int position, List<? extends BaseResponse> response) {
         RecyclerView recyclerView = mRecyclerViewArrayList.get(position);
         LinearLayoutManager linearLayoutManager = new
                 LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -79,12 +88,23 @@ public class MainFragment extends Fragment {
         }
     }
 
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
     private void setItemClick(final ItemAdapter adapter, final int pos) {
         adapter.setOnItemClickListener(new ItemAdapter.OnItemClickListener() {
             @Override
             public void onClick(BaseResponse model, ImageView pictureImageView) {
                 ((BaseActivity) getActivity()).setFragment(TourFragment
-                        .newInstance(model, ViewCompat.getTransitionName(pictureImageView)), pictureImageView);            }
+                        .newInstance(model, ViewCompat.getTransitionName(pictureImageView)), pictureImageView);
+            }
         });
     }
 
@@ -97,60 +117,13 @@ public class MainFragment extends Fragment {
         });
     }
 
-    private void requestItemsFromNetwork() {
-        //first cardview
-        Call<List<TourRes>> callTours = CommonRepository.getInstance().getNearestToursNetwork();
-        callTours.enqueue(new Callback<List<TourRes>>() {
-            @Override
-            public void onResponse(Call<List<TourRes>> call, Response<List<TourRes>> response) {
-                if (response.isSuccessful()) {
-                    initRecyclerView(0, response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<TourRes>> call, Throwable t) {
-
-            }
-        });
-
-        //second cardview
-        Call<List<PlaceRes>> showPlacesCall = CommonRepository.getInstance().getNearestPlacesNetwork();
-        showPlacesCall.enqueue(new Callback<List<PlaceRes>>() {
-            @Override
-            public void onResponse(Call<List<PlaceRes>> call, Response<List<PlaceRes>> response) {
-                if (response.isSuccessful()) {
-                    List<PlaceRes> placeResList = null;
-                    if (response.code() == 304) {
-                        CommonRepository.getInstance().getNearestPlacesDb();
-                    } else {
-                        placeResList = response.body();
-                        KeyValueStorage.getInstance().saveLastPlacesUpdate(response.headers().get("ETag"));
-                    }
-                    initRecyclerView(1, placeResList);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<PlaceRes>> call, Throwable t) {
-
-            }
-        });
-
-        //third cardview
-        Call<List<ServiceRes>> servicesCall = CommonRepository.getInstance().getServicesNetwork();
-        servicesCall.enqueue(new Callback<List<ServiceRes>>() {
-            @Override
-            public void onResponse(Call<List<ServiceRes>> call, Response<List<ServiceRes>> response) {
-                if (response.isSuccessful()) {
-                    initRecyclerView(2, response.body());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<ServiceRes>> call, Throwable t) {
-
-            }
-        });
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        mMainPresenter.dropView();
+        if (isRemoving()) {
+            Log.d(TAG, "onDestroyView() called");
+            mMainPresenter.destroy();
+        }
     }
 }

@@ -16,12 +16,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ru.devtron.republicperi.R;
+import ru.devtron.republicperi.data.KeyValueStorage;
 import ru.devtron.republicperi.ui.base.BaseActivity;
 import ru.devtron.republicperi.ui.screen.auth.AuthActivity;
 import ru.devtron.republicperi.ui.screen.profile.ProfileActivity;
 
 public class MainActivity extends BaseActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout mDrawerLayout;
     private NavigationView mNavigationView;
@@ -65,7 +66,12 @@ public class MainActivity extends BaseActivity
             @Override
             public void onClick(View view) {
                 mDrawerLayout.closeDrawer(GravityCompat.START);
-                Intent intent = new Intent(MainActivity.this, AuthActivity.class);
+                Intent intent;
+                if (KeyValueStorage.getInstance().getKeyToken().equals("")) {
+                    intent = new Intent(MainActivity.this, AuthActivity.class);
+                } else {
+                    intent = new Intent(MainActivity.this, ProfileActivity.class);
+                }
                 startActivity(intent);
             }
         });

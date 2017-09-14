@@ -63,7 +63,6 @@ public class ServiceCreatorFragment extends Fragment
     RecyclerView mRecyclerView;
 
 
-
     private ItemTouchHelper mItemTouchHelper;
     RecyclerAddingImagesAdapter imageAdapter;
     private File photoFile = null;
